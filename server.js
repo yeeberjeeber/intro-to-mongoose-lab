@@ -1,15 +1,18 @@
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
-import Customer from ''
+import Customer from './models/customer.js'
 
 const app = express();
 app.use(express.json());
 
-const mongoURI = process.env.mongoURI;
+const mongoURI = process.env.MONGO_URI;
 
 mongoose.connect(mongoURI)
-.then(() => console.log('Connected!'))
+.then(() => {
+  console.log('Connected to MongoDB!');
+  console.log('Database name:', mongoose.connection.name);
+})
 .catch(err => console.log('MongoDB connection error: ', err));
 
 // Routes
